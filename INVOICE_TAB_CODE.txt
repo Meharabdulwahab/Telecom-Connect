@@ -1,0 +1,50 @@
+// Add this AFTER customers tab closes (around line 330) and BEFORE plans tab starts
+
+                {activeTab === 'invoices' && (
+                    <>
+                        <div className="card" style={{ padding: '1.5rem', overflowX: 'auto' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                <thead>
+                                    <tr style={{ borderBottom: '2px solid var(--border)', textAlign: 'left' }}>
+                                        <th style={{ padding: '0.75rem' }}>Invoice #</th>
+                                        <th style={{ padding: '0.75rem' }}>Customer</th>
+                                        <th style={{ padding: '0.75rem' }}>Amount</th>
+                                        <th style={{ padding: '0.75rem' }}>Status</th>
+                                        <th style={{ padding: '0.75rem' }}>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {invoices.map((inv, idx) => (
+                                        <tr key={idx} style={{ borderBottom: '1px solid var(--border)' }}>
+                                            <td style={{ padding: '0.75rem', fontWeight: 600 }}>#{inv.invoice_id}</td>
+                                            <td style={{ padding: '0.75rem' }}>
+                                                <div>{inv.customer_name}</div>
+                                                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{inv.email}</div>
+                                            </td>
+                                            <td style={{ padding: '0.75rem', fontWeight: 600 }}>Rs. {parseFloat(inv.total_amount_due).toLocaleString()}</td>
+                                            <td style={{ padding: '0.75rem' }}>
+                                                <span style={{
+                                                    padding: '4px 12px',
+                                                    borderRadius: '20px',
+                                                    background: inv.payment_status === 'Paid' ? '#d1fae5' : inv.payment_status === 'Pending' ? '#fef3c7' : '#fee2e2',
+                                                    color: inv.payment_status === 'Paid' ? '#065f46' : inv.payment_status === 'Pending' ? '#92400e' : '#991b1b',
+                                                    fontSize: '0.75rem',
+                                                    fontWeight: 600
+                                                }}>{inv.payment_status}</span>
+                                            </td>
+                                            <td style={{ padding: '0.75rem', fontSize: '0.875rem' }}>
+                                                {new Date(inv.invoice_date).toLocaleDateString()}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                            {invoices.length === 0 && (
+                                <p style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>
+                                    📋 No invoices yet. Invoices are generated when customers subscribe to plans.
+                                </p>
+                            )}
+                        </div>
+                    </>
+                )}
+ 
