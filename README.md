@@ -124,5 +124,5 @@ The fastest way to deploy the entire stack.
 ## 📄 License
 This project is licensed under the **MIT License**.
 
-Designed & Developed by **Haseeb Ahmad**.
+Designed & Developed by **Abdul Wahab**.
 *Transforming Telecommunications through Code.*
